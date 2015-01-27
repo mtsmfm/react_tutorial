@@ -1,8 +1,11 @@
 CommentList = React.createClass
   render: ->
+    commentNodes = @.props.data.map (comment) ->
+      <Comment author={comment.author}>
+        {comment.text}
+      </Comment>
     <div className="commentList">
-      <Comment author="Pete Hunt">This is one comment</Comment>
-      <Comment author="Jordan Walke">This is *another* comment</Comment>
+      {commentNodes}
     </div>
 
 CommentForm = React.createClass
@@ -15,7 +18,7 @@ CommentBox = React.createClass
   render: ->
     <div className="commentBox">
       <h1>Comments</h1>
-      <CommentList />
+      <CommentList data={@.props.data}/>
       <CommentForm />
     </div>
 
@@ -30,8 +33,13 @@ Comment = React.createClass
       <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
     </div>
 
+data = [
+  {author:"Pete Hunt", text: "This is one comment"},
+  {author:"Jordan Walke", text: "This is *another* comment"}
+]
+
 $ ->
   React.render(
-    <CommentBox />,
+    <CommentBox data={data}/>,
     document.getElementById('content')
   )
