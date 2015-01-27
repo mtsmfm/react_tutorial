@@ -13,6 +13,7 @@ gem 'uglifier'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-react'
+  gem 'rails-assets-showdown'
 end
 
 group :development do

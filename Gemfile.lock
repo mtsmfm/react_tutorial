@@ -118,6 +118,7 @@ GEM
       railties (= 4.2.0)
       sprockets-rails
     rails-assets-react (0.12.2)
+    rails-assets-showdown (0.3.4)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.5)
@@ -180,6 +181,7 @@ DEPENDENCIES
   pry-rails
   rails (~> 4.2.0)
   rails-assets-react!
+  rails-assets-showdown!
   sass-rails
   spring
   sprockets-coffee-react
