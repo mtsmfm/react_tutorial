@@ -15,10 +15,23 @@ CommentForm = React.createClass
     </div>
 
 CommentBox = React.createClass
+  getInitialState: ->
+    {data: []}
+  componentDidMount: ->
+    $.ajax
+      url: @.props.url
+      dataType: 'json'
+      success: ((data) ->
+        @.setState(data: data)
+      ).bind(@)
+      error: ((xhr, status, err) ->
+        console.error @props.url, status, err.toString()
+      ).bind(@)
+
   render: ->
     <div className="commentBox">
       <h1>Comments</h1>
-      <CommentList data={@.props.data}/>
+      <CommentList data={@.state.data}/>
       <CommentForm />
     </div>
 
@@ -33,13 +46,8 @@ Comment = React.createClass
       <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
     </div>
 
-data = [
-  {author:"Pete Hunt", text: "This is one comment"},
-  {author:"Jordan Walke", text: "This is *another* comment"}
-]
-
 $ ->
   React.render(
-    <CommentBox data={data}/>,
+    <CommentBox url="home/comments.json"/>,
     document.getElementById('content')
   )
