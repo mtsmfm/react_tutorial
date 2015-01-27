@@ -8,7 +8,12 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'pg'
 gem 'sass-rails'
+gem 'sprockets-coffee-react'
 gem 'uglifier'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-react'
+end
 
 group :development do
   gem 'pry-byebug', group: :test
