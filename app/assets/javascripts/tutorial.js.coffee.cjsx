@@ -28,6 +28,20 @@ CommentForm = React.createClass
 
 CommentBox = React.createClass
   handleCommentSubmit: (comment) ->
+    comments = @state.data
+    newComments = comments.concat([comment])
+    @setState(data: newComments)
+    $.ajax
+      url: @props.url
+      dataType: 'json'
+      type: 'POST'
+      data: {comment},
+      success: ((data) ->
+        @setState({data})
+      ).bind(@)
+      error: ((xhr, status, err) ->
+        console.error(@props.url, status, err.toString())
+      ).bind(@)
   loadCommentsFromServer: ->
     $.ajax
       url: @props.url
@@ -63,6 +77,6 @@ Comment = React.createClass
 
 $ ->
   React.render(
-    <CommentBox url="home/comments.json" pollInterval={2000}/>,
+    <CommentBox url="comments.json" pollInterval={2000}/>,
     document.getElementById('content')
   )
